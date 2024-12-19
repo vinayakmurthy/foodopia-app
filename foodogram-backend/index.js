@@ -240,11 +240,6 @@ app.delete('/api/profile/image', verifyToken, async (req, res) => {
   });
 });
 
-// Protected Route (Example)
-app.get('/home', verifyToken, (req, res) => {
-    res.status(200).json({ message: `Welcome to Foodogram, user ${req.userId}` });
-});
-
 // Create Recipe
 app.post('/api/recipes', verifyToken, upload.fields([
   { name: 'media', maxCount: 1 },
@@ -1399,7 +1394,7 @@ process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
-app.get('*', (req, res) => {
+app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
