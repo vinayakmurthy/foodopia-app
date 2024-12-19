@@ -12,7 +12,10 @@ pipeline{
 
     stages{
         stage('clone the repo'){
-            git branch: 'main', url: 'https://github.com/vinayakmurthy/foodopia-app.git'
+            steps{
+                git branch: 'main', url: 'https://github.com/vinayakmurthy/foodopia-app.git'
+            }
+            
         }
     }
 }
