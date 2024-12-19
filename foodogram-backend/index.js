@@ -26,13 +26,13 @@ const upload = multer({
 });
 
 const app = express();
-const port = 5000;
+const port = 3000;
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+  origin: '*',  // Allow any domain to access
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use((req, res, next) => {
@@ -1403,6 +1403,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on http://0.0.0.0:${port}`);
 });
