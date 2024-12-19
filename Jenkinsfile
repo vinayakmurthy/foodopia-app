@@ -15,7 +15,14 @@ pipeline{
             steps{
                 git branch: 'main', url: 'https://github.com/vinayakmurthy/foodopia-app.git'
             }
-            
+        }
+
+        stage("build the docker image"){
+            steps{
+                withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
+                    echo 'google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS'
+                }
+            }
         }
     }
 }
