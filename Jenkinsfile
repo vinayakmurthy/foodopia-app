@@ -20,7 +20,8 @@ pipeline{
         stage("build the docker image"){
             steps{
                 withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
-                    echo 'google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS'
+                    echo "google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS"
+                    sh "docker build -t foodopia-image:$BUILD_NUMBER ."
                 }
             }
         }
