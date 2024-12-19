@@ -55,7 +55,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
         const fetchBadges = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get('http://localhost:5000/api/cooking-badges', {
+                const response = await axios.get('http://16.16.26.118:3000/api/cooking-badges', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setAvailableBadges(response.data);
@@ -77,7 +77,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
             const decoded = jwtDecode(token);
             const username = decoded.username;
 
-            const response = await axios.get(`http://localhost:5000/api/users/${username}`, {
+            const response = await axios.get(`http://16.16.26.118:3000/api/users/${username}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -99,7 +99,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
     const fetchMyRecipes = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:5000/api/my-recipes', {
+            const response = await axios.get('http://16.16.26.118:3000/api/my-recipes', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             console.log('Fetched recipes:', response.data);
@@ -112,7 +112,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
     const fetchSavedRecipes = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:5000/api/saved-recipes', {
+            const response = await axios.get('http://16.16.26.118:3000/api/saved-recipes', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setSavedRecipes(response.data);
@@ -155,7 +155,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
             console.log('Uploading file:', file);
 
             const response = await axios.put(
-                'http://localhost:5000/api/profile',
+                'http://16.16.26.118:3000/api/profile',
                 formData,
                 {
                     headers: {
@@ -192,7 +192,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
                 formData.append('profile_image', profile.profile_image);
             }
 
-            await axios.put('http://localhost:5000/api/profile', formData, {
+            await axios.put('http://16.16.26.118:3000/api/profile', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -215,7 +215,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
         if (window.confirm('chef, are you sure you want to delete this recipe?')) {
             try {
                 const token = localStorage.getItem('token');
-                await axios.delete(`http://localhost:5000/api/recipes/${recipeId}`, {
+                await axios.delete(`http://16.16.26.118:3000/api/recipes/${recipeId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setMyRecipes(myRecipes.filter(recipe => recipe.id !== recipeId));
@@ -233,7 +233,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
         try {
             const token = localStorage.getItem('token');
             await axios.post(
-                `http://localhost:5000/api/recipes/${recipeId}/save`,
+                `http://16.16.26.118:3000/api/recipes/${recipeId}/save`,
                 {},
                 {
                     headers: { Authorization: `Bearer ${token}` }
@@ -275,7 +275,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
     const handleRemoveProfilePicture = async () => {
         try {
             const token = localStorage.getItem('token');
-            await axios.delete('http://localhost:5000/api/profile/image', {
+            await axios.delete('http://16.16.26.118:3000/api/profile/image', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             
@@ -290,7 +290,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
         try {
             const token = localStorage.getItem('token');
             await axios.put(
-                'http://localhost:5000/api/profile',
+                'http://16.16.26.118:3000/api/profile',
                 { remove_cooking_level: 'true' },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -307,7 +307,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
             console.log('Updating badge to:', badge); // Debug log
 
             const response = await axios.put(
-                'http://localhost:5000/api/profile',
+                'http://16.16.26.118:3000/api/profile',
                 { cooking_level: badge },
                 {
                     headers: {
@@ -350,7 +350,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
             const decoded = jwtDecode(token);
             const username = decoded.username;
 
-            const response = await axios.get(`http://localhost:5000/api/users/${username}`, {
+            const response = await axios.get(`http://16.16.26.118:3000/api/users/${username}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setProfile(response.data);
@@ -377,7 +377,7 @@ function Profile({ isOpen, onClose, onRecipeDeleted }) {
         try {
             const token = localStorage.getItem('token');
             await axios.put(
-                'http://localhost:5000/api/profile',
+                'http://16.16.26.118:3000/api/profile',
                 { cooking_level: badge },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

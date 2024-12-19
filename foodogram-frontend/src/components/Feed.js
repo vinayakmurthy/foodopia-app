@@ -8,7 +8,7 @@ const Feed = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/posts');
+        const response = await axios.get('http://16.16.26.118:3000/posts');
         setPosts(response.data);
       } catch (err) {
         console.error('Error fetching posts', err);

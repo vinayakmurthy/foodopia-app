@@ -65,7 +65,7 @@ function Home() {
   const refreshToken = async () => {
     try {
       const oldToken = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:5000/api/refresh-token', {
+      const response = await axios.post('http://16.16.26.118:3000/api/refresh-token', {
         token: oldToken
       });
       const newToken = response.data.token;
@@ -88,7 +88,7 @@ function Home() {
         if (!token) return;
       }
 
-      const response = await axios.get('http://localhost:5000/api/recipes', {
+      const response = await axios.get('http://16.16.26.118:3000/api/recipes', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRecipes(response.data);
@@ -96,7 +96,7 @@ function Home() {
       if (error.response?.status === 401) {
         const newToken = await refreshToken();
         if (newToken) {
-          const response = await axios.get('http://localhost:5000/api/recipes', {
+          const response = await axios.get('http://16.16.26.118:3000/api/recipes', {
             headers: { Authorization: `Bearer ${newToken}` }
           });
           setRecipes(response.data);
@@ -123,7 +123,7 @@ function Home() {
   const fetchNotifications = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/notifications', {
+      const response = await axios.get('http://16.16.26.118:3000/api/notifications', {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -168,7 +168,7 @@ function Home() {
   const handleLike = async (recipeId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:5000/api/recipes/${recipeId}/like`, {}, {
+      await axios.post(`http://16.16.26.118:3000/api/recipes/${recipeId}/like`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchRecipes(); // Refresh recipes to update like count
@@ -186,7 +186,7 @@ function Home() {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/notifications/${notification.id}/read`,
+        `http://16.16.26.118:3000/api/notifications/${notification.id}/read`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -274,7 +274,7 @@ function Home() {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        'http://localhost:5000/api/notifications/mark-all-read',
+        'http://16.16.26.118:3000/api/notifications/mark-all-read',
         {},
         {
           headers: { Authorization: `Bearer ${token}` }
