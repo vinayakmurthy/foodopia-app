@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 // At the top of your file, update the db connection
 const db = mysql.createPool({
-    host: '51.20.37.76',
+    host: '13.60.183.42',
     user: 'root',
     password: 'admin123',
     database: 'foodogram',
