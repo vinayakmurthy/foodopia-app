@@ -32,7 +32,7 @@ pipeline{
                     sh """
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
                         docker push ${DOCKER_IMAGE}:V${BUILD_NUMBER}
-                        docker run -d --name foodopia-container -p 80:3000 ${DOCKER_IMAGE}:V${BUILD_NUMBER}
+                        docker run -d --name foodopia-container -p 80:80 ${DOCKER_IMAGE}:V${BUILD_NUMBER}
                     """
                 }
 
