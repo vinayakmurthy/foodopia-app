@@ -42,7 +42,7 @@ ENV GOOGLE_CLOUD_PROJECT_ID=${GOOGLE_CLOUD_PROJECT_ID}
 ENV GOOGLE_CLOUD_API_KEY=${GOOGLE_CLOUD_API_KEY}
 
 #Copy the foodogram-transalte json file to the /foodopia/foodogram-backend/config
-COPY ./foodogram-translate-3d477959314e.json /foodopia/foodogram-backend/config/
+COPY ./google_cred.json /foodopia/foodogram-backend/config/foodogram-translate-3d477959314e.json
 
 #set the GOOGLE_APPLICATION_CREDENTIALS env
 ENV GOOGLE_APPLICATION_CREDENTIALS=../foodogram-backend/config/foodogram-translate-3d477959314e.json
