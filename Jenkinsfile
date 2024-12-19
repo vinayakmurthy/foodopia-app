@@ -26,12 +26,13 @@ pipeline{
             }
         }
 
-        stage('Push the image to docker hub'){
+        stage('Push the image to docker hub and run the container'){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'dockercred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
                     sh """
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
                         docker push ${DOCKER_IMAGE}:V${BUILD_NUMBER}
+                        docker run -d --name foodopia-container -p 80:3000 ${DOCKER_IMAGE}:V${BUILD_NUMBER}
                     """
                 }
 
