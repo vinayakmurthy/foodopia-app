@@ -66,7 +66,7 @@ function RecipeDetails({
   const fetchComments = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://16.16.26.118:3000/api/recipes/${recipe.id}/comments`, {
+      const response = await axios.get(`http://16.16.26.118/api/recipes/${recipe.id}/comments`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setComments(response.data);
@@ -78,7 +78,7 @@ function RecipeDetails({
   const checkLikeStatus = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://16.16.26.118:3000/api/recipes/${recipe.id}/like-status`, {
+      const response = await axios.get(`http://16.16.26.118/api/recipes/${recipe.id}/like-status`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setIsLiked(response.data.liked);
@@ -90,7 +90,7 @@ function RecipeDetails({
   const checkSaveStatus = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://16.16.26.118:3000/api/recipes/${recipe.id}/save-status`, {
+      const response = await axios.get(`http://16.16.26.118/api/recipes/${recipe.id}/save-status`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setIsSaved(response.data.saved);
@@ -159,7 +159,7 @@ function RecipeDetails({
   const handleLike = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(`http://16.16.26.118:3000/api/recipes/${recipe.id}/like`, {}, {
+      const response = await axios.post(`http://16.16.26.118/api/recipes/${recipe.id}/like`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -192,7 +192,7 @@ function RecipeDetails({
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `http://16.16.26.118:3000/api/recipes/${recipe.id}/comments`,
+        `http://16.16.26.118/api/recipes/${recipe.id}/comments`,
         { content: newComment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -239,7 +239,7 @@ function RecipeDetails({
       console.log('Attempting to save recipe:', recipe.id);
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `http://16.16.26.118:3000/api/recipes/${recipe.id}/save`,
+        `http://16.16.26.118/api/recipes/${recipe.id}/save`,
         {},
         {
           headers: { 
@@ -301,7 +301,7 @@ function RecipeDetails({
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://16.16.26.118:3000/api/translate',
+        'http://16.16.26.118/api/translate',
         {
           text: [recipe.name, recipe.ingredients, recipe.instructions],
           targetLanguage: language
@@ -354,7 +354,7 @@ function RecipeDetails({
       const token = localStorage.getItem('token');
       const response = await axios({
         method: 'post',
-        url: 'http://16.16.26.118:3000/api/text-to-speech',
+        url: 'http://16.16.26.118/api/text-to-speech',
         data: { text, languageCode },
         headers: { Authorization: `Bearer ${token}` },
         responseType: 'blob'
@@ -428,7 +428,7 @@ function RecipeDetails({
       const token = localStorage.getItem('token');
       const response = await axios({
         method: 'post',
-        url: 'http://16.16.26.118:3000/api/text-to-speech',
+        url: 'http://16.16.26.118/api/text-to-speech',
         data: { 
           text: recipeText,
           languageCode: lang 

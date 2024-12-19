@@ -19,7 +19,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://16.16.26.118:3000/login', { email, password });
+      const response = await axios.post('http://16.16.26.118/login', { email, password });
       localStorage.setItem('token', response.data.token);
       navigate('/home');
     } catch (err) {
