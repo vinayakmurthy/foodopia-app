@@ -1,0 +1,659 @@
+.profile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.3s ease;
+}
+
+.profile-modal {
+  background: linear-gradient(
+    165deg,
+    rgba(28, 28, 30, 0.95) 0%,
+    rgba(18, 18, 18, 0.95) 100%
+  );
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  border-radius: 24px;
+  overflow: hidden;
+  color: white;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 20px 100px -20px rgba(0, 0, 0, 0.7);
+  position: relative;
+  animation: slideUp 0.4s ease;
+  overflow-y: auto;
+  border: 1px solid rgba(192, 192, 192, 0.1);
+}
+
+.profile-header {
+  background: linear-gradient(
+    to bottom,
+    rgba(192, 192, 192, 0.08),
+    rgba(128, 128, 128, 0.02)
+  );
+  padding: 3rem;
+  position: relative;
+}
+
+.profile-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(192, 192, 192, 0.1),
+    transparent 50%
+  );
+}
+
+.profile-image-container {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  position: relative;
+  background: linear-gradient(45deg, #1a1a1a, #2c2c2c);
+  border: 3px solid rgba(192, 192, 192, 0.5);
+  box-shadow: 
+    0 0 0 4px rgba(192, 192, 192, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.profile-image-container:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: rgba(192, 192, 192, 0.8);
+  box-shadow: 
+    0 0 0 6px rgba(192, 192, 192, 0.15),
+    0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.profile-name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #c0c0c0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #c0c0c0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.edit-profile-btn {
+  background: rgba(192, 192, 192, 0.1);
+  border: 2px solid rgba(192, 192, 192, 0.4);
+  color: #c0c0c0;
+  padding: 0.8rem 1.8rem;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+
+.edit-profile-btn:hover {
+  background: rgba(192, 192, 192, 0.15);
+  border-color: rgba(192, 192, 192, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    0 0 0 4px rgba(192, 192, 192, 0.1);
+}
+
+/* Update scrollbar styles */
+.profile-modal::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.profile-modal::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  margin: 4px;
+}
+
+.profile-modal::-webkit-scrollbar-thumb {
+  background: rgba(32, 32, 32, 0.9);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.profile-modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(48, 48, 48, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Firefox scrollbar styles */
+.profile-modal {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(32, 32, 32, 0.9) rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: Hide scrollbar when not hovering */
+.profile-modal {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.profile-modal:hover {
+  scrollbar-width: thin;
+  -ms-overflow-style: auto;
+}
+
+.profile-modal:not(:hover)::-webkit-scrollbar {
+  display: none;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.upload-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.profile-main-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cooking-badge {
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cooking-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.profile-stats {
+  display: flex;
+  gap: 3rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.profile-bio {
+  color: #9ca3af;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: 0.5rem;
+}
+
+.profile-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.75rem;
+  margin: 0 auto;
+  background: none;
+  max-width: 300px;
+  position: relative;
+  border-top: none;
+}
+
+/* Keep only the bottom line */
+.profile-tabs::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.delete-recipe-btn {
+  position: absolute;
+  top: 8px; /* Slightly adjust top for alignment */
+  right: 8px; /* Slightly adjust right for alignment */
+  background: rgba(255, 255, 255, 0.1); /* Transparent background with light opacity */
+  color: rgba(255, 0, 0, 0.8); /* Soft red color */
+  border: 2px solid rgba(255, 0, 0, 0.5); /* Thin red border */
+  border-radius: 50%; /* Circular button */
+  padding: 8px; /* Reduced padding for a smaller button */
+  font-size: 16px; /* Smaller icon size */
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); /* Subtle glowing shadow */
+  opacity: 0;
+  transform: scale(0); /* Initially hidden */
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-post:hover .delete-recipe-btn {
+  transform: scale(1); /* Show the button on hover */
+  opacity: 1;
+}
+
+.delete-recipe-btn:hover {
+  background: rgba(255, 0, 0, 0.2); /* Soft red background on hover */
+  box-shadow: 0 0 25px rgba(255, 0, 0, 1), 0 0 50px rgba(255, 0, 0, 0.6); /* Intense glowing effect */
+  transform: scale(1.1); /* Slightly larger button on hover */
+  border-color: rgba(255, 0, 0, 1); /* Neon border glow */
+  color: white; /* White icon color when hovered */
+  animation: pulse 1s infinite; /* Pulsing animation for interaction */
+}
+
+.delete-recipe-btn svg {
+  font-size: 18px; /* Slightly smaller icon */
+  transition: transform 0.3s ease, filter 0.3s ease, color 0.3s ease;
+}
+
+.delete-recipe-btn:hover svg {
+  transform: rotate(180deg); /* Smooth rotation for the icon */
+  filter: drop-shadow(0 0 15px rgba(255, 0, 0, 1)); /* Glowing effect on the icon */
+  color: #fff; /* White icon color on hover */
+}
+
+/* Keyframe animation for pulsing effect */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8), 0 0 50px rgba(255, 0, 0, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.3);
+  }
+}
+
+
+.tab-button {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  position: relative;
+  min-width: 80px;
+}
+
+/* Add underline effect for active tab */
+.tab-button::after {
+  content: '';
+  position: absolute;
+  bottom: -0.75rem;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #2d98da;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.tab-button.active {
+  color: #2d98da;
+}
+
+.tab-button.active::after {
+  transform: scaleX(1);
+}
+
+.tab-button:hover {
+  color: #2d98da;
+  background: none;
+}
+
+.tab-button:hover::after {
+  transform: scaleX(1);
+}
+
+.default-profile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #2f3339, #1e2126);
+  border-radius: 50%;
+}
+
+.default-profile-icon {
+  font-size: 4rem;
+  color: rgba(224, 102, 255, 0.3);
+}
+
+.hidden-input {
+  display: none;
+}
+
+/* Add a pulsing animation for the upload prompt */
+@keyframes uploadPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+.upload-prompt {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+.profile-image-container:hover .upload-prompt {
+  opacity: 1;
+}
+
+.upload-icon {
+  font-size: 2rem;
+  color: #e066ff;
+  animation: uploadPulse 2s infinite;
+}
+
+.upload-text {
+  color: white;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.badge-selector-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+  backdrop-filter: blur(4px);
+}
+
+.badge-selector-content {
+  background: #1e2126;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.badge-selector-content h3 {
+  color: white;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.badge-options {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.badge-option {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #2f3339;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-option:hover {
+  background: #363b44;
+  transform: translateY(-2px);
+}
+
+.badge-option.selected {
+  border-color: #e066ff;
+  background: rgba(224, 102, 255, 0.1);
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(224, 102, 255, 0.2);
+}
+
+.badge-option.selected::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(224, 102, 255, 0.1),
+    transparent
+  );
+  animation: shine 1.5s infinite;
+}
+
+/* Add shine animation */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.badge-option h4 {
+  margin: 0 0 0.2rem 0;
+  font-size: 0.95rem;
+  color: white;
+}
+
+.badge-description {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.badge-selector-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.badge-selector-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.badge-selector-btn.save {
+  background: #e066ff;
+  color: white;
+  border: none;
+}
+
+.badge-selector-btn.save:hover {
+  background: #c653e6;
+  transform: translateY(-2px);
+}
+
+.badge-selector-btn.cancel {
+  background: transparent;
+  border: 1px solid #9ca3af;
+  color: #9ca3af;
+}
+
+.badge-selector-btn.cancel:hover {
+  border-color: white;
+  color: white;
+}
+
+.add-badge-btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  background: rgba(224, 102, 255, 0.08);
+  border: 2px solid rgba(224, 102, 255, 0.3);
+  color: #e066ff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(224, 102, 255, 0.1);
+}
+
+.add-badge-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(224, 102, 255, 0.1),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.add-badge-btn:hover {
+  background: rgba(224, 102, 255, 0.15);
+  border-color: rgba(224, 102, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(224, 102, 255, 0.2);
+}
+
+.add-badge-btn:hover::before {
+  left: 100%;
+}
+
+.add-badge-btn svg {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.add-badge-btn:hover svg {
+  transform: rotate(360deg) scale(1.1);
+}
+
+.add-badge-btn span {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Badge color variations */
+.badge-option.Kitchen-Rookie {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(69, 160, 73, 0.1));
+  border-color: #4CAF50;
+}
+
+.badge-option.Sous-Chef {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(25, 118, 210, 0.1));
+  border-color: #2196F3;
+}
+
+.badge-option.Master-Chef {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(245, 124, 0, 0.1));
+  border-color: #FF9800;
+}
+
+.badge-option.Culinary-Legend {
+  background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(194, 24, 91, 0.1));
+  border-color: #E91E63;
+}
+
+.badge-remove-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 59, 48, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.5);
+  color: #ff3b30;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.badge-remove-btn:hover {
+  background: rgba(255, 59, 48, 0.2);
+  transform: translateY(-2px);
+}
+

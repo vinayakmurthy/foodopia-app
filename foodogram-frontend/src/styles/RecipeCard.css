@@ -1,0 +1,110 @@
+.recipe-card {
+    background: #1e2126;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.recipe-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #2f3339;
+    border: 2px solid #e066ff;
+}
+
+.author-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.default-avatar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2f3339;
+    color: #4a4a4a;
+}
+
+.default-avatar svg {
+    font-size: 1.2rem;
+}
+
+.author-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: white;
+}
+
+/* Update existing styles */
+.recipe-image-container {
+    position: relative;
+    padding-top: 75%; /* 4:3 aspect ratio */
+    background: #2f3339;
+}
+
+.recipe-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Add responsive styles */
+@media (max-width: 768px) {
+    .recipe-author {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .author-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .author-name {
+        font-size: 0.85rem;
+    }
+} 
+
+.video-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    pointer-events: none;
+}
+
+.recipe-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} 

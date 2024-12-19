@@ -1,0 +1,336 @@
+.profile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.profile-modal {
+  background: linear-gradient(
+    165deg,
+    rgba(28, 28, 30, 0.95) 0%,
+    rgba(18, 18, 18, 0.95) 100%
+  );
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 20px 100px -20px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(192, 192, 192, 0.1);
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  border-radius: 12px;
+  overflow-y: auto;
+  position: relative;
+  color: white;
+}
+
+.close-profile-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+.close-profile-btn:hover {
+  color: #2d98da;
+}
+
+.profile-content {
+  padding: 2rem;
+}
+
+.profile-header {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+.profile-image-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.profile-image-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid rgba(192, 192, 192, 0.5);
+  box-shadow: 
+    0 0 0 4px rgba(192, 192, 192, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+  margin-bottom: 0.5rem;
+}
+
+.profile-username {
+  font-size: 1.5rem;
+  margin: 0;
+  background: linear-gradient(135deg, #fff 0%, #c0c0c0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+.profile-info {
+  flex: 1;
+  padding-top: 0.5rem;
+}
+
+.profile-main-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.profile-main-info h2 {
+  font-size: 1.8rem;
+  margin: 0;
+  background: linear-gradient(135deg, #fff 0%, #2d98da 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.follow-btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  min-width: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.follow-btn:not(.following) {
+  background: linear-gradient(135deg, #404040 0%, #2c2c2c 100%);
+  border: none;
+  color: white;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 0 2px rgba(192, 192, 192, 0.1);
+}
+
+.follow-btn.following {
+  background: rgba(192, 192, 192, 0.1);
+  border: 2px solid rgba(192, 192, 192, 0.4);
+  color: #c0c0c0;
+}
+
+.follow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.4),
+    0 0 0 4px rgba(192, 192, 192, 0.1);
+}
+
+.follow-btn:active {
+  transform: translateY(0);
+}
+
+.follow-btn.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.follow-btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin: -8px 0 0 -8px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: button-loading-spinner 0.6s linear infinite;
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.stats-row {
+  display: flex;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1.5rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.stat-label {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.recipe-post {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.recipe-post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.post-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.recipe-post:hover .post-overlay {
+  opacity: 1;
+}
+
+.recipe-post:hover img {
+  transform: scale(1.05);
+}
+
+.post-stats {
+  display: flex;
+  gap: 2rem;
+  color: white;
+}
+
+.post-stats span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-bio {
+  color: #9ca3af;
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+
+.profile-location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.cooking-badge {
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cooking-badge svg {
+  font-size: 1.1rem;
+}
+
+.cooking-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Add these scrollbar styles */
+.profile-modal::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.profile-modal::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  margin: 4px;
+}
+
+.profile-modal::-webkit-scrollbar-thumb {
+  background: rgba(32, 32, 32, 0.9);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.profile-modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(48, 48, 48, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Firefox scrollbar styles */
+.profile-modal {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(32, 32, 32, 0.9) rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: Hide scrollbar when not hovering */
+.profile-modal {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.profile-modal:hover {
+  scrollbar-width: thin;
+  -ms-overflow-style: auto;
+}
+
+.profile-modal:not(:hover)::-webkit-scrollbar {
+  display: none;
+} 

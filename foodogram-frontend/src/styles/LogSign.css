@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+/* General Body Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #1a1d21;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Login page container */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Login card styling */
+.login-card {
+    background-color: #1e2126;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    border: 1px solid rgba(224, 102, 255, 0.1);
+}
+
+/* Logo styling */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.logo h1 {
+    color: #e066ff;
+    font-size: 2.4rem;
+    font-weight: 600;
+    font-family: 'Dancing Script', cursive;
+    text-shadow: 2px 2px 15px rgba(224, 102, 255, 0.3);
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #e066ff 0%, #9333ea 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.burger-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(224, 102, 255, 0.3));
+    transition: transform 0.3s ease;
+    background: rgba(224, 102, 255, 0.05);
+    padding: 8px;
+    border-radius: 50%;
+    border: 2px solid rgba(224, 102, 255, 0.1);
+}
+
+/* Login heading */
+.login-heading {
+    font-size: 1.1rem;
+    color: #9ca3af;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+    font-style: italic;
+}
+
+/* Input fields styling */
+.input-wrapper {
+    margin-bottom: 1.2rem;
+    position: relative;
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    border: 2px solid rgba(224, 102, 255, 0.1);
+    border-radius: 8px;
+    background-color: #252830;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: rgba(224, 102, 255, 0.5);
+    background-color: #2a2f38;
+    box-shadow: 0 0 0 4px rgba(224, 102, 255, 0.1);
+}
+
+/* Password toggle button */
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: #e066ff;
+}
+
+/* Login button */
+.login-button {
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #e066ff 0%, #9333ea 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(224, 102, 255, 0.2);
+}
+
+.login-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(224, 102, 255, 0.3);
+}
+
+.login-button:hover::before {
+    transform: translateX(100%);
+}
+
+.login-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(224, 102, 255, 0.2);
+}
+
+/* Error message */
+.error {
+    color: #ff4444;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Sign up link */
+.signup-link {
+    margin-top: 1.5rem;
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+.signup-link a {
+    color: #e066ff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #9333ea;
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 2rem;
+    }
+
+    .logo h1 {
+        font-size: 2rem;
+    }
+
+    .burger-logo {
+        width: 50px;
+        height: 50px;
+    }
+}
