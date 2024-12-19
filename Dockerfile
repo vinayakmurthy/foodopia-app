@@ -64,7 +64,7 @@ RUN ls -la ./
 COPY --from=frontend-build /foodopia/foodogram-frontend/build/. /foodopia/foodogram-backend/build
 
 #expose the image to 3000
-EXPOSE 3000
+EXPOSE 80
 
 #Now run the index.js
 CMD [ "node", "./index.js" ]
