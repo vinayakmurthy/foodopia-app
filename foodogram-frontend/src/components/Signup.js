@@ -21,7 +21,7 @@ const Signup = () => {
       return;
     }
     try {
-      await axios.post('http://16.16.26.118/signup', { username, email, password });
+      await axios.post('http://51.20.74.171/signup', { username, email, password });
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Signup failed');

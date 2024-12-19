@@ -21,7 +21,7 @@ function UserProfile({ username, isOpen, onClose }) {
   const fetchUserProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://16.16.26.118:3000/api/users/${username}`, {
+      const response = await axios.get(`http://51.20.74.171/api/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProfile(response.data);
@@ -34,7 +34,7 @@ function UserProfile({ username, isOpen, onClose }) {
   const fetchUserRecipes = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://16.16.26.118:3000/api/recipes/user/${username}`, {
+      const response = await axios.get(`http://51.20.74.171/api/recipes/user/${username}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUserRecipes(response.data);
@@ -56,11 +56,11 @@ function UserProfile({ username, isOpen, onClose }) {
       }));
 
       if (newFollowingState) {
-        await axios.post(`http://16.16.26.118:3000/api/users/${username}/follow`, {}, {
+        await axios.post(`http://51.20.74.171/api/users/${username}/follow`, {}, {
           headers: { Authorization: `Bearer ${token}` }
         });
       } else {
-        await axios.delete(`http://16.16.26.118:3000/api/users/${username}/follow`, {
+        await axios.delete(`http://51.20.74.171/api/users/${username}/follow`, {
           headers: { Authorization: `Bearer ${token}` }
         });
       }
