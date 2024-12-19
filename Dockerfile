@@ -52,6 +52,7 @@ COPY ./foodogram-backend/package-lock.json ./foodogram-backend/package.json ./
 
 #install the backend dependencies
 RUN npm install
+RUN npm install aws-sdk multer --save
 
 #copy the thw whole foodogram-backend folder to /foodopia/foodogram-backend
 COPY ./foodogram-backend/. ./
