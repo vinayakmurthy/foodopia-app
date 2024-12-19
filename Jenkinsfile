@@ -32,8 +32,6 @@ pipeline{
                     sh """
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
                         docker push ${DOCKER_IMAGE}:V${BUILD_NUMBER}
-                        docker push ${DOCKER_IMAGE}:latest
-
                     """
                 }
 
