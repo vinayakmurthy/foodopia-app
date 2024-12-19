@@ -59,9 +59,6 @@ COPY ./foodogram-backend/. ./
 #run ls command to see what is inside the /foodopia/foodogram-backend ==> just to know the things are getting copied
 RUN ls -la ./
 
-#Copy the foodogram-transalte json file to the /foodopia/foodogram-backend/config
-COPY ${GOOGLE_APPLICATION_CREDENTIALS} /foodopia/foodogram-backend/config
-
 #now copy the build folder that we generated in first stage to /foodopia/foodogram-backend
 COPY --from=frontend-build /foodopia/foodogram-frontend/build/. /foodopia/foodogram-backend/build
 
