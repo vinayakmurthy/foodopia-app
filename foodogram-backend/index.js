@@ -66,7 +66,7 @@ db.getConnection((err, connection) => {
   connection.release();
 });
 
-// Serve static files from the frontend build folder
+// Serve static files from the frontend-build folder
 app.use(express.static(path.join(__dirname, 'build')));
 
 // Near the top of your file, add this for debugging
@@ -973,7 +973,7 @@ app.post('/api/refresh-token', async (req, res) => {
     }
 });
 
-// Add this to serve static files
+// Add this to serve static files 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Add this endpoint to get available badges
