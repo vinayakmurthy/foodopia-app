@@ -21,6 +21,7 @@ pipeline{
             steps{
                 withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
                     echo "google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS"
+                    sh "cp $GOOGLE_APPLICATION_CREDENTIALS ./foodogram-translate-3d477959314e.json"
                     sh "docker build -t ${DOCKER_IMAGE}:V${BUILD_NUMBER} ."
                 }
             }
