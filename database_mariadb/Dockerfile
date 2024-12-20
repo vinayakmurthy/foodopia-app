@@ -1,8 +1,11 @@
 FROM mariadb:10.5.22
 
+ARG MYSQL_PASSWORD
 #set the enviorment variables
 ENV MYSQL_ROOT_PASSWORD=admin123
 ENV MYSQL_DATABASE=foodogram
+ENV MYSQL_USER=vinayak
+ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
 #inject the .sql file to the mariadb
 COPY ./foodogram_backup.sql /docker-entrypoint-initdb.d/
