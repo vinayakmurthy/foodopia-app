@@ -24,7 +24,7 @@ pipeline{
             steps{
                 withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
                     echo "google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS"
-                    sh "cp $GOOGLE_APPLICATION_CREDENTIALS ./Google_credes$BUILD_NUMBER.json"
+                    sh "cp -f $GOOGLE_APPLICATION_CREDENTIALS ./Google_creds.json"
                     sh "docker build -t ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER} ."
                 }
             }
