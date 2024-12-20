@@ -43,8 +43,8 @@ pipeline{
                 withCredentials([usernamePassword(credentialsId: 'dockercred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
                     sh """
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
-                        docker push ${DOCKER_IMAGE}:V${BUILD_NUMBER}
                         docker push ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER}
+                        docker push ${DOCKER_DB_IMAGE}:V${BUILD_NUMBER}
                     """
                 }
             }
