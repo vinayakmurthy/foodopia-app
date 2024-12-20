@@ -1,7 +1,6 @@
-
-CREATE USER IF NOT EXISTS 'vinayak'@'%';
+CREATE USER IF NOT EXISTS 'vinayak'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON foodogram.* TO 'vinayak'@'%';
 
-CREATE USER IF NOT EXISTS 'vinayak'@'localhost';
+CREATE USER IF NOT EXISTS 'vinayak'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON foodogram.* TO 'vinayak'@'localhost';
 FLUSH PRIVILEGES;

@@ -33,7 +33,7 @@ pipeline{
             steps{
                 sh """
                     ls -la ./database_mariadb/
-                    docker build -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                    docker build --build-arg MYSQL_PASSWORD=$MYSQL_PASSWORD -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
                 """
             }
         }
