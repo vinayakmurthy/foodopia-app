@@ -7,6 +7,9 @@ ENV MYSQL_DATABASE=foodogram
 ENV MYSQL_USER=vinayak
 ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
+# Install gettext package to provide envsubst
+RUN apt-get update && apt-get install -y gettext
+
 #inject the .sql file to the mariadb
 COPY ./foodogram_backup.sql /docker-entrypoint-initdb.d/
 COPY ./grant_prev.sql /docker-entrypoint-initdb.d/
