@@ -9,7 +9,7 @@ pipeline{
         AWS_SECRET_ACCESS_KEY=credentials('AWS_SECRET_ACCESS_KEY')
         DOCKER_APP_IMAGE= 'coderhub1/foodopia'
         DOCKER_DB_IMAGE = 'coderhub1/foodopia_db'
-        MYSQL_USER=credentials('MYSQL_USER')
+        MYSQL_USER=vinayak
         MYSQL_PASSWORD=credentials('MYSQL_PASSWORD')
     }
 
