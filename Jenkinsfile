@@ -33,7 +33,7 @@ pipeline{
             steps{
                 sh """
                     ls -la ./database_mariadb/
-                    docker build --no-cache -t $DOCKER_DB_IMAGE:$BUILD_NUMBER ./database_mariadb/ --progress=plain
+                    docker build -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
                 """
             }
         }
