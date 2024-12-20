@@ -1,5 +1,6 @@
 FROM mariadb:10.5.22
 
+ARG MYSQL_PASSWORD
 #set the enviorment variables
 ENV MYSQL_ROOT_PASSWORD=admin123
 ENV MYSQL_DATABASE=foodogram
