@@ -32,6 +32,7 @@ pipeline{
         stage('build the database image'){
             steps{
                 sh """
+                    ls -la ./database_mariadb/
                     docker build --no-cache -t $DOCKER_DB_IMAGE:$BUILD_NUMBER ./database_mariadb/
                 """
             }
