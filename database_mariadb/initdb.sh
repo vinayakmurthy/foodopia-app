@@ -10,5 +10,3 @@ GRANT ALL PRIVILEGES ON foodogram.* TO 'vinayak'@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-# Set permissions for the generated SQL file
-chmod 644 /docker-entrypoint-initdb.d/grant_prev.sql
