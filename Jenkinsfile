@@ -42,7 +42,7 @@ pipeline{
         stage('build the database image'){
             steps{
                 script{
-                    def lastbuild = BUILD_NUMBER - 1
+                    def lastbuild = (BUILD_NUMBER.toInteger() - 1)
                     def lastimagetag = "$DOCKER_DB_IMAGE:V${lastbuild}"
 
                     sh """
