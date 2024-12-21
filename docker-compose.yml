@@ -1,0 +1,11 @@
+version: '3'
+services:
+  foodopia-db:
+    image: ${DOCKER_DB_IMAGE}:V${BUILD_NUMBER}
+    ports:
+      - 3306:3306
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
