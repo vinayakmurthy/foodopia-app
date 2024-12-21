@@ -33,7 +33,7 @@ pipeline{
         stage('build the database image'){
             steps{
                 sh """
-                    docker build t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                    docker build -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
                 """
             }
         }
