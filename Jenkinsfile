@@ -48,7 +48,7 @@ pipeline{
                     sh """
                     docker rm db-cont
                     docker rmi $lastimagetag || true
-                    docker build -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                    docker build --build-arg ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --build-arg USER_PASSWORD=$MYSQL_USER_PASSWORD -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
                     """
                 }
                 
