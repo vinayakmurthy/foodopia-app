@@ -10,5 +10,5 @@ GRANT ALL PRIVILEGES ON foodogram.* TO 'vinayak'@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-# Move the generated file to the correct directory
-mv /tmp/grant_prev.sql /docker-entrypoint-initdb.d/
+# Move the generated file to a writable init directory
+mv /tmp/grant_prev.sql /var/lib/mysql/initdb.d/
