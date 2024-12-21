@@ -10,7 +10,7 @@ pipeline{
         DOCKER_APP_IMAGE= 'coderhub1/foodopia'
         DOCKER_DB_IMAGE = 'coderhub1/foodopia_db'
         MYSQL_ROOT_PASSWORD=credentials('MYSQL_ROOT_PASSWORD')
-        MYSQL_PASSWORD=credentials('MYSQL_USER_PASSWORD')
+        MYSQL_USER_PASSWORD=credentials('MYSQL_USER_PASSWORD')
     }
 
     stages{
@@ -48,7 +48,7 @@ pipeline{
                     sh """
                     docker rm db-cont
                     docker rmi $lastimagetag || true
-                    docker build --build-arg MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --build-arg MYSQL_USER_PASSWORD=$MYSQL_ROOT_PASSWORD -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                    docker build --build-arg ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --build-arg USER_PASSWORD=$MYSQL_USER_PASSWORD -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
                     """
                 }
                 
