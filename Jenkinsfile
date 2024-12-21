@@ -31,11 +31,26 @@ pipeline{
             }
         }*/
 
-        stage('build the database image'){
+        /*stage('docker secrets for root and user'){
             steps{
                 sh """
-                    docker build -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                    echo "$MYSQL_ROOT_PASSWORD" | docker secret create MYSQL_ROOT_PASSWORD -
                 """
+            }
+        }*/
+
+        stage('build the database image'){
+            steps{
+                script{
+                    def lastbuild = BUILD_NUMBER - 1
+                    def lastimagetag = "$DOCKER_DB_IMAGE:V${lastbuild}"
+
+                    sh """
+                    docker rmi $lastimagetag || true
+                    docker build --build-arg MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --build-arg MYSQL_USER_PASSWORD=$MYSQL_ROOT_PASSWORD -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                    """
+                }
+                
             }
         }
 
