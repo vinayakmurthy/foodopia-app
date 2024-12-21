@@ -21,7 +21,7 @@ pipeline{
         }
 
 
-        /*stage("build the app-image"){
+        stage("build the app-image"){
             steps{
                 withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
                     echo "google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS"
@@ -29,7 +29,7 @@ pipeline{
                     sh "docker build -t ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER} ."
                 }
             }
-        }*/
+        }
 
         /*stage('docker secrets for root and user'){
             steps{
@@ -48,14 +48,14 @@ pipeline{
                     sh """
                     docker rm db-cont
                     docker rmi $lastimagetag || true
-                    docker build --build-arg ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --build-arg USER_PASSWORD=$MYSQL_USER_PASSWORD -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                    docker build -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
                     """
                 }
                 
             }
         }
 
-        /*stage('Push the images to docker hubr'){
+        stage('Push the images to docker hubr'){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'dockercred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
                     sh """
@@ -64,7 +64,7 @@ pipeline{
                     """
                 }
             }
-        }*/
+        }
 
         /*stage('Create container using docker compose'){
             steps{
