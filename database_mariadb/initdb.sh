@@ -10,5 +10,8 @@ GRANT ALL PRIVILEGES ON foodogram.* TO 'vinayak'@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-# Move the generated file to a writable init directory
-mv /tmp/grant_prev.sql /var/lib/mysql/initdb.d/
+# Execute the SQL file using the MariaDB client
+mysql -u root -p"$MYSQL_ROOT_PASSWORD" < /tmp/grant_prev.sql
+
+# Clean up (Optional)
+rm -f /tmp/grant_prev.sql
