@@ -2,6 +2,9 @@
 FROM node:22.11.0 AS frontend-build
 WORKDIR /foodopia/foodogram-frontend
 
+ARG REACT_APP_APP_URL
+ENV REACT_APP_APP_URL=${REACT_APP_APP_URL}
+
 #copy the foodogram-frontend package-json and package-lock.json and install all the dependencies
 COPY ./foodogram-frontend/package-lock.json ./foodogram-frontend/package.json ./
 

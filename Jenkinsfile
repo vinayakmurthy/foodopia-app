@@ -27,7 +27,7 @@ pipeline{
                 withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
                     echo "google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS"
                     sh "cp -f $GOOGLE_APPLICATION_CREDENTIALS ./Google_creds.json"
-                    sh "docker build --no-cache -t ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER} ."
+                    sh "docker build --no-cache --build-arg REACT_APP_APP_URL=${REACT_APP_APP_URL} -t ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER} ."
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline{
         stage('build the database image'){
             steps{
                 sh """
-                    docker build --no-cache --build-arg REACT_APP_APP_URL=${REACT_APP_APP_URL}  -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                    docker build --no-cache -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
                     """
             }
         }
