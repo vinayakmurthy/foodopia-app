@@ -11,7 +11,7 @@ pipeline{
         DOCKER_DB_IMAGE = 'coderhub1/foodopia_db'
         SQL_ROOT_PASSWORD=credentials('MYSQL_ROOT_PASSWORD')
         SQL_USER_PASSWORD=credentials('MYSQL_USER_PASSWORD')
-        APP_URL='http://51.20.40.204'
+        REACT_APP_APP_URL='http://51.20.40.204'
     }
 
     stages{
@@ -42,7 +42,7 @@ pipeline{
         stage('build the database image'){
             steps{
                 sh """
-                    docker build --no-cache -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                    docker build --no-cache --build-arg REACT_APP_APP_URL=${REACT_APP_APP_URL}  -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
                     """
             }
         }

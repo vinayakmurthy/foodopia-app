@@ -26,7 +26,7 @@ const CreateRecipe = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(`${process.env.APP_URL}/upload-recipe`, formData, {
+      const response = await axios.post(`${process.env.REACT_APP_APP_URL}/upload-recipe`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // After successful upload, reset form and add more functionality

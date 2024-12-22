@@ -25,6 +25,9 @@ RUN ls -la /foodopia/foodogram-frontend/
 FROM node:22.11.0
 WORKDIR /foodopia/foodogram-backend
 
+ARG REACT_APP_APP_URL
+ENV REACT_APP_APP_URL=${REACT_APP_APP_URL}
+
 #Copy the foodogram-transalte json file to the /foodopia/foodogram-backend/config
 COPY ./Google_creds.json /foodopia/foodogram-backend/config/foodogram-translate-3d477959314e.json
 

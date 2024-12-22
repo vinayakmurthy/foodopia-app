@@ -21,7 +21,7 @@ function UserProfile({ username, isOpen, onClose }) {
   const fetchUserProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${process.env.APP_URL}/api/users/${username}`, {
+      const response = await axios.get(`${process.env.REACT_APP_APP_URL}/api/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProfile(response.data);
@@ -34,7 +34,7 @@ function UserProfile({ username, isOpen, onClose }) {
   const fetchUserRecipes = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${process.env.APP_URL}/api/recipes/user/${username}`, {
+      const response = await axios.get(`${process.env.REACT_APP_APP_URL}/api/recipes/user/${username}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUserRecipes(response.data);
@@ -56,11 +56,11 @@ function UserProfile({ username, isOpen, onClose }) {
       }));
 
       if (newFollowingState) {
-        await axios.post(`${process.env.APP_URL}/api/users/${username}/follow`, {}, {
+        await axios.post(`${process.env.REACT_APP_APP_URL}/api/users/${username}/follow`, {}, {
           headers: { Authorization: `Bearer ${token}` }
         });
       } else {
-        await axios.delete(`${process.env.APP_URL}/api/users/${username}/follow`, {
+        await axios.delete(`${process.env.REACT_APP_APP_URL}/api/users/${username}/follow`, {
           headers: { Authorization: `Bearer ${token}` }
         });
       }
