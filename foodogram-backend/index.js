@@ -30,7 +30,7 @@ const port = 80;
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'http://51.20.40.204',
+  origin: 'http://51.20.129.178',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));

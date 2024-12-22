@@ -11,7 +11,7 @@ pipeline{
         DOCKER_DB_IMAGE = 'coderhub1/foodopia_db'
         SQL_ROOT_PASSWORD=credentials('MYSQL_ROOT_PASSWORD')
         SQL_USER_PASSWORD=credentials('MYSQL_USER_PASSWORD')
-        REACT_APP_APP_URL='http://51.20.40.204'
+        REACT_APP_APP_URL='http://51.20.129.178'
     }
 
     stages{
