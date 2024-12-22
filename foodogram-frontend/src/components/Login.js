@@ -19,7 +19,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://51.20.74.171/login', { email, password });
+      const response = await axios.post(`${process.env.APP_URL}/login`, { email, password });
       localStorage.setItem('token', response.data.token);
       navigate('/home');
     } catch (err) {

@@ -21,7 +21,7 @@ const Signup = () => {
       return;
     }
     try {
-      await axios.post('http://51.20.74.171/signup', { username, email, password });
+      await axios.post(`${process.env.APP_URL}/signup`, { username, email, password });
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Signup failed');

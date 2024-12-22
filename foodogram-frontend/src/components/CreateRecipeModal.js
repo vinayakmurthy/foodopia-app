@@ -80,7 +80,7 @@ function CreateRecipeModal({ isOpen, onClose, onRecipeCreated }) {
       }
 
       const response = await axios.post(
-        'http://51.20.74.171/api/recipes',
+        `${process.env.APP_URL}/api/recipes`,
         formData,
         {
           headers: {

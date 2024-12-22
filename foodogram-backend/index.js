@@ -30,7 +30,7 @@ const port = 80;
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'http://51.20.74.171',  // Allow any domain to access
+  origin: process.env.APP_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -42,9 +42,9 @@ app.use((req, res, next) => {
 
 // At the top of your file, update the db connection
 const db = mysql.createPool({
-    host: '13.60.183.42',
-    user: 'root',
-    password: 'admin123',
+    host: 'foodopia-db',
+    user: 'vinayak',
+    password: process.env.DB_USER_PASSWORD,
     database: 'foodogram',
     waitForConnections: true,
     connectionLimit: 10,

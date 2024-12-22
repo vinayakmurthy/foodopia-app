@@ -11,6 +11,7 @@ pipeline{
         DOCKER_DB_IMAGE = 'coderhub1/foodopia_db'
         SQL_ROOT_PASSWORD=credentials('MYSQL_ROOT_PASSWORD')
         SQL_USER_PASSWORD=credentials('MYSQL_USER_PASSWORD')
+        APP_URL='http://13.60.86.152/'
     }
 
     stages{
