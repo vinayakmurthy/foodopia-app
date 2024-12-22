@@ -25,22 +25,6 @@ RUN ls -la /foodopia/foodogram-frontend/
 FROM node:22.11.0
 WORKDIR /foodopia/foodogram-backend
 
-#set enviornment variables required for backend 
-ARG S3_BUCKET_NAME
-ARG AWS_REGION
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
-ARG GOOGLE_CLOUD_PROJECT_ID
-ARG GOOGLE_CLOUD_API_KEY
-ARG GOOGLE_APPLICATION_CREDENTIALS
-
-ENV S3_BUCKET_NAME=${S3_BUCKET_NAME}
-ENV AWS_REGION=${AWS_REGION}
-ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-ENV GOOGLE_CLOUD_PROJECT_ID=${GOOGLE_CLOUD_PROJECT_ID}
-ENV GOOGLE_CLOUD_API_KEY=${GOOGLE_CLOUD_API_KEY}
-
 #Copy the foodogram-transalte json file to the /foodopia/foodogram-backend/config
 COPY ./Google_creds.json /foodopia/foodogram-backend/config/foodogram-translate-3d477959314e.json
 

@@ -9,8 +9,8 @@ pipeline{
         AWS_SECRET_ACCESS_KEY=credentials('AWS_SECRET_ACCESS_KEY')
         DOCKER_APP_IMAGE= 'coderhub1/foodopia'
         DOCKER_DB_IMAGE = 'coderhub1/foodopia_db'
-        MYSQL_ROOT_PASSWORD=credentials('MYSQL_ROOT_PASSWORD')
-        MYSQL_USER_PASSWORD=credentials('MYSQL_USER_PASSWORD')
+        SQL_ROOT_PASSWORD=credentials('MYSQL_ROOT_PASSWORD')
+        SQL_USER_PASSWORD=credentials('MYSQL_USER_PASSWORD')
     }
 
     stages{
@@ -26,11 +26,10 @@ pipeline{
                 withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
                     echo "google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS"
                     sh "cp -f $GOOGLE_APPLICATION_CREDENTIALS ./Google_creds.json"
-                    sh "docker build -t ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER} ."
+                    sh "docker build --no-cache -t ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER} ."
                 }
             }
         }
-
         /*stage('docker secrets for root and user'){
             steps{
                 sh """
@@ -41,17 +40,9 @@ pipeline{
 
         stage('build the database image'){
             steps{
-                script{
-                    def lastbuild = (BUILD_NUMBER.toInteger() - 1)
-                    def lastimagetag = "$DOCKER_DB_IMAGE:V${lastbuild}"
-
-                    sh """
-                    docker rm db-cont
-                    docker rmi $lastimagetag || true
-                    docker build --build-arg ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --build-arg USER_PASSWORD=$MYSQL_USER_PASSWORD -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                sh """
+                    docker build --no-cache -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
                     """
-                }
-                
             }
         }
 
@@ -60,16 +51,17 @@ pipeline{
                 withCredentials([usernamePassword(credentialsId: 'dockercred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
                     sh """
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
+                        docker push ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER}
                         docker push ${DOCKER_DB_IMAGE}:V${BUILD_NUMBER}
                     """
                 }
             }
         }
-
-        /*stage('Create container using docker compose'){
+        
+        stage('Create container using docker compose'){
             steps{
                 sh "docker compose up -d"
             }
-        }*/
+        }
     }
 }
