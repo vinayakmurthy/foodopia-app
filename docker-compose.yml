@@ -1,11 +1,11 @@
 version: '3'
 services:
   foodopia-app:
-    image: coderhub1/foodopia:V3
+    image: ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER}
     ports:
       - 80:80
     depends_on:
-      - foodopia-db
+      - foodopia-db-service
     environment:
       - GOOGLE_CLOUD_PROJECT_ID=${GOOGLE_CLOUD_PROJECT_ID}
       - GOOGLE_CLOUD_API_KEY=${GOOGLE_CLOUD_API_KEY}
@@ -18,7 +18,7 @@ services:
       - app-network
 
   foodopia-db-service:
-    image: coderhub1/foodopia_db:V3
+    image: ${DOCKER_DB_IMAGE}:V${BUILD_NUMBER}
     ports:
       - 3306:3306
     environment:
