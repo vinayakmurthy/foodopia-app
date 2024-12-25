@@ -58,10 +58,10 @@ pipeline{
             }
         }
         
-        /*stage('Create container using docker compose'){
+        stage('Create container using docker compose'){
             steps{
                 sh "docker compose up -d"
             }
-        }*/
+        }
     }
 }
