@@ -25,8 +25,9 @@ const CreateRecipe = () => {
     if (image) formData.append('image', image);
 
     try {
+      const baseURL = window.location.origin;
       const token = localStorage.getItem('token');
-      const response = await axios.post(`${process.env.REACT_APP_APP_URL}/upload-recipe`, formData, {
+      const response = await axios.post(`${window.location.origin}/upload-recipe`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // After successful upload, reset form and add more functionality

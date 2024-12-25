@@ -2,9 +2,6 @@
 FROM node:22.11.0 AS frontend-build
 WORKDIR /foodopia/foodogram-frontend
 
-ARG REACT_APP_APP_URL
-ENV REACT_APP_APP_URL=${REACT_APP_APP_URL}
-
 #copy the foodogram-frontend package-json and package-lock.json and install all the dependencies
 COPY ./foodogram-frontend/package-lock.json ./foodogram-frontend/package.json ./
 
@@ -27,9 +24,6 @@ RUN ls -la /foodopia/foodogram-frontend/
 #stage-2 copy the build folder to foodogram-backend
 FROM node:22.11.0
 WORKDIR /foodopia/foodogram-backend
-
-ARG REACT_APP_APP_URL
-ENV REACT_APP_APP_URL=${REACT_APP_APP_URL}
 
 #Copy the foodogram-transalte json file to the /foodopia/foodogram-backend/config
 COPY ./Google_creds.json /foodopia/foodogram-backend/config/foodogram-translate-3d477959314e.json

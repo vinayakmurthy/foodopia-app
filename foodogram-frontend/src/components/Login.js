@@ -19,7 +19,8 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_APP_URL}/login`, { email, password });
+      const baseURL = window.location.origin; // Automatically gets the current domain
+      const response = await axios.post(`${window.location.origin}/login`, { email, password });
       localStorage.setItem('token', response.data.token);
       navigate('/home');
     } catch (err) {

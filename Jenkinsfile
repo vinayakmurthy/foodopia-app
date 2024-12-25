@@ -11,7 +11,6 @@ pipeline{
         DOCKER_DB_IMAGE = 'coderhub1/foodopia_db'
         SQL_ROOT_PASSWORD=credentials('MYSQL_ROOT_PASSWORD')
         SQL_USER_PASSWORD=credentials('MYSQL_USER_PASSWORD')
-        REACT_APP_APP_URL='http://51.20.129.178'
     }
 
     stages{
@@ -27,7 +26,7 @@ pipeline{
                 withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
                     echo "google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS"
                     sh "cp -f $GOOGLE_APPLICATION_CREDENTIALS ./Google_creds.json"
-                    sh "docker build --no-cache --build-arg REACT_APP_APP_URL=${REACT_APP_APP_URL} -t ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER} ."
+                    sh "docker build --no-cache -t ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER} ."
                 }
             }
         }
@@ -59,10 +58,10 @@ pipeline{
             }
         }
         
-        stage('Create container using docker compose'){
+        /*stage('Create container using docker compose'){
             steps{
                 sh "docker compose up -d"
             }
-        }
+        }*/
     }
 }

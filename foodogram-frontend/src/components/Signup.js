@@ -21,7 +21,7 @@ const Signup = () => {
       return;
     }
     try {
-      await axios.post(`${process.env.REACT_APP_APP_URL}/signup`, { username, email, password });
+      await axios.post(`${window.location.origin}/signup`, { username, email, password });
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Signup failed');

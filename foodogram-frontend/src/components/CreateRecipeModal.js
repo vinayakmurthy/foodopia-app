@@ -80,7 +80,7 @@ function CreateRecipeModal({ isOpen, onClose, onRecipeCreated }) {
       }
 
       const response = await axios.post(
-        `${process.env.REACT_APP_APP_URL}/api/recipes`,
+        `${window.location.origin}/api/recipes`,
         formData,
         {
           headers: {

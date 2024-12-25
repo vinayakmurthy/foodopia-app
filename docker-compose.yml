@@ -1,7 +1,7 @@
 version: '3'
 services:
   foodopia-app:
-    image: ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER}
+    image: coderhub1/foodopia:V3
     ports:
       - 80:80
     depends_on:
@@ -17,8 +17,8 @@ services:
     networks:
       - app-network
 
-  foodopia-db:
-    image: ${DOCKER_DB_IMAGE}:V${BUILD_NUMBER}
+  foodopia-db-service:
+    image: coderhub1/foodopia_db:V3
     ports:
       - 3306:3306
     environment:

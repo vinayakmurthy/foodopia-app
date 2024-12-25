@@ -65,7 +65,7 @@ function Home() {
   const refreshToken = async () => {
     try {
       const oldToken = localStorage.getItem('token');
-      const response = await axios.post(`${process.env.REACT_APP_APP_URL}/api/refresh-token`, {
+      const response = await axios.post(`${window.location.origin}/api/refresh-token`, {
         token: oldToken
       });
       const newToken = response.data.token;
@@ -88,7 +88,7 @@ function Home() {
         if (!token) return;
       }
 
-      const response = await axios.get(`${process.env.REACT_APP_APP_URL}/api/recipes`, {
+      const response = await axios.get(`${window.location.origin}/api/recipes`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRecipes(response.data);
@@ -96,7 +96,7 @@ function Home() {
       if (error.response?.status === 401) {
         const newToken = await refreshToken();
         if (newToken) {
-          const response = await axios.get(`${process.env.REACT_APP_APP_URL}/api/recipes`, {
+          const response = await axios.get(`${window.location.origin}/api/recipes`, {
             headers: { Authorization: `Bearer ${newToken}` }
           });
           setRecipes(response.data);
@@ -123,7 +123,7 @@ function Home() {
   const fetchNotifications = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${process.env.REACT_APP_APP_URL}/api/notifications`, {
+      const response = await axios.get(`${window.location.origin}/api/notifications`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -168,7 +168,7 @@ function Home() {
   const handleLike = async (recipeId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`${process.env.REACT_APP_APP_URL}/api/recipes/${recipeId}/like`, {}, {
+      await axios.post(`${window.location.origin}/api/recipes/${recipeId}/like`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchRecipes(); // Refresh recipes to update like count
@@ -186,7 +186,7 @@ function Home() {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `${process.env.REACT_APP_APP_URL}/api/notifications/${notification.id}/read`,
+        `${window.location.origin}/api/notifications/${notification.id}/read`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -274,7 +274,7 @@ function Home() {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `${process.env.REACT_APP_APP_URL}/api/notifications/mark-all-read`,
+        `${window.location.origin}/api/notifications/mark-all-read`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` }
