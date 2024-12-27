@@ -32,7 +32,7 @@ pipeline{
             }
         }
 
-        stage('Push the images to docker hubr'){
+        stage('Push the images to docker hub'){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'dockercred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
                     sh """
