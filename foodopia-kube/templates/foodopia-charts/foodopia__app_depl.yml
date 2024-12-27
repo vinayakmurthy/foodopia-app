@@ -20,10 +20,9 @@ spec:
           image: busybox
           command: ['sh', '-c', 'until nc -z foodopia-db-svc 3306; do echo waiting for database; sleep 5; done']
       containers:
-        - name: foodopia-app-cont
+        - name: app-cont
           image: "{{ .Values.app.image }}:{{ .Values.app.tag }}"
           ports:
-            - name: foodopia-app-port
               containerPort: 80
           env: 
             - name: GOOGLE_CLOUD_PROJECT_ID

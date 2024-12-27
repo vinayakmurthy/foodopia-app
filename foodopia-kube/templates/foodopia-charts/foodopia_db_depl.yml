@@ -16,10 +16,9 @@ spec:
         app: foodopia-db
     spec:
       containers:
-        - name: foodopia-db-cont
+        - name: db-cont
           image: "{{ .Values.db.image }}:{{ .Values.db.tag }}"
           ports:
-            - name: foodopia-db-port
               containerPort: 3306
           env:
             - name: MYSQL_DATABASE
