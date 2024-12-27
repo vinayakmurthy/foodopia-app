@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: foodopia-deployment
-  namespace: {{ .Release.Namespace }}  # This dynamically uses the namespace provided during Helm install/upgrade
+  namespace: foodopia  # This dynamically uses the namespace provided during Helm install/upgrade
   labels: 
     app: foodopia-app
 spec: 

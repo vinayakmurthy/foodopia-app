@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: foodopia-db-deployment
-  namespace: {{ .Release.Namespace }}
+  namespace: foodopia
   labels:
     app: foodopia-db
 spec:
