@@ -1,16 +1,10 @@
 pipeline{
     agent any
     environment{
-        GOOGLE_CLOUD_PROJECT_ID='foodogram-translate'
-        GOOGLE_CLOUD_API_KEY=credentials('GOOGLE_CLOUD_API_KEY')
         S3_BUCKET_NAME='foodogram-recipes'
         AWS_REGION='eu-north-1'
-        AWS_ACCESS_KEY_ID=credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY=credentials('AWS_SECRET_ACCESS_KEY')
         DOCKER_APP_IMAGE= 'coderhub1/foodopia'
         DOCKER_DB_IMAGE = 'coderhub1/foodopia_db'
-        SQL_ROOT_PASSWORD=credentials('MYSQL_ROOT_PASSWORD')
-        SQL_USER_PASSWORD=credentials('MYSQL_USER_PASSWORD')
     }
 
     stages{
