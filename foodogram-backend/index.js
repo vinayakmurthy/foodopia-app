@@ -30,7 +30,7 @@ const port = 80;
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: ['http://foodopia.life', 'http://www.foodopia.life'],
+  origin: ['https://foodopia.life', 'https://www.foodopia.life'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));

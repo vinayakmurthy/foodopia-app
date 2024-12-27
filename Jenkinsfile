@@ -30,14 +30,6 @@ pipeline{
                 }
             }
         }
-        /*stage('docker secrets for root and user'){
-            steps{
-                sh """
-                    echo "$MYSQL_ROOT_PASSWORD" | docker secret create MYSQL_ROOT_PASSWORD -
-                """
-            }
-        }*/
-
         stage('build the database image'){
             steps{
                 sh """
@@ -58,9 +50,24 @@ pipeline{
             }
         }
         
-        stage('Create container using docker compose'){
+        /*stage('Create container using docker compose'){
             steps{
                 sh "docker compose up -d"
+            }
+        }*/
+
+        stage('Deploy to kubernetes'){
+            steps{
+                script{
+                    sh """
+                        helm --upgrade install foodopia-release ./foodopia-kube \
+                        --namespace foodopia \
+                        --set app.image=${DOCKER_APP_IMAGE} \
+                        --set app.tag=V${BUILD_NUMBER} \
+                        --set db.image=${DOCKER_DB_IMAGE}
+                        --set db.tag=V${BUILD_NUMBER}
+                    """
+                }
             }
         }
     }

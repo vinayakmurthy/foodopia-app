@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: foodopia-deployment
+  namespace: {{ .Release.Namespace }}  # This dynamically uses the namespace provided during Helm install/upgrade
+  labels: 
+    app: foodopia-app
+spec: 
+  replicas: 2
+  selector: 
+    matchLabels:
+      app: foodopia-app
+  template:
+    metadata:
+      labels:
+        app: foodopia-app
+    spec:
+      initContainers:
+        - name: init-wait-db
+          image: busybox
+          command: ['sh', '-c', 'until nc -z foodopia-db-svc 3306; do echo waiting for database; sleep 5; done']
+      containers:
+        - name: foodopia-app-cont
+          image: "{{ .Values.app.image }}:{{ .Values.app.tag }}"
+          ports:
+            - name: foodopia-app-port
+              containerPort: 80
+          env: 
+            - name: GOOGLE_CLOUD_PROJECT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: non-sens-data
+                  key: GOOGLE_CLOUD_PROJECT_ID
+            - name: S3_BUCKET_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: non-sens-data
+                  key: S3_BUCKET_NAME
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: non-sens-data
+                  key: AWS_REGION
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: sens-data
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: sens-data
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: GOOGLE_CLOUD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: sens-data
+                  key: GOOGLE_CLOUD_API_KEY
+            - name: DB_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sens-data
+                  key: DB_USER_PASSWORD

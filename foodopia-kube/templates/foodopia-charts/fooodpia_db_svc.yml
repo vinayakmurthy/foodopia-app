@@ -1,0 +1,14 @@
+apiVersion: v1 
+kind: Service
+metadata:
+  name: foodopia-db-svc
+  labels:
+    app: foodopia-db-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: foodopia-db
+  ports:
+    - port: 3306
+      targetPort: 3306
+      protocol: TCP

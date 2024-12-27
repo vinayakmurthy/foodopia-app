@@ -1,0 +1,6 @@
+app:
+  image: coderhub1/foodopia
+  tag: "latest"  # This will be dynamically replaced
+db:
+  image: coderhub1/foodopia_db
+  tag: "latest"  # This will be dynamically replaced

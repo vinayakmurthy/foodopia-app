@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: foodopia-db
+  labels:
+    app: fooodpia-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: foodopia-db
+  template:
+    metadata:
+      labels:
+        app: foodopia-db
+    spec:
+      containers:
+        - name: foodopia-db-cont
+          image: coderhub/foodopia_db:V5
+          ports:
+            - name: foodopia-db-port
+              containerPort: 3306
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: non-sens-data
+                  key: MYSQL_DATABASE
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: non-sens-data
+                  key: MYSQL_USER
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sens-data
+                  key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sens-data
+                  key: MYSQL_PASSWORD
