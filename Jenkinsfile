@@ -26,14 +26,14 @@ pipeline{
                 withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
                     echo "google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS"
                     sh "cp -f $GOOGLE_APPLICATION_CREDENTIALS ./Google_creds.json"
-                    sh "docker build --no-cache -t ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER} ."
+                    sh "docker build --no-cache -t ${DOCKER_APP_IMAGE}:${BUILD_NUMBER} ."
                 }
             }
         }
         stage('build the database image'){
             steps{
                 sh """
-                    docker build --no-cache -t $DOCKER_DB_IMAGE:V$BUILD_NUMBER ./database_mariadb/
+                    docker build --no-cache -t $DOCKER_DB_IMAGE:$BUILD_NUMBER ./database_mariadb/
                     """
             }
         }
@@ -43,8 +43,8 @@ pipeline{
                 withCredentials([usernamePassword(credentialsId: 'dockercred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
                     sh """
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
-                        docker push ${DOCKER_APP_IMAGE}:V${BUILD_NUMBER}
-                        docker push ${DOCKER_DB_IMAGE}:V${BUILD_NUMBER}
+                        docker push ${DOCKER_APP_IMAGE}:${BUILD_NUMBER}
+                        docker push ${DOCKER_DB_IMAGE}:${BUILD_NUMBER}
                     """
                 }
             }
@@ -64,9 +64,9 @@ pipeline{
                         helm upgrade --install foodopia-release ./foodopia-kube \
                         --namespace foodopia \
                         --set app.image=${DOCKER_APP_IMAGE} \
-                        --set app.tag=V${BUILD_NUMBER} \
+                        --set app.tag=${BUILD_NUMBER} \
                         --set db.image=${DOCKER_DB_IMAGE}
-                        --set db.tag=V${BUILD_NUMBER}
+                        --set db.tag=${BUILD_NUMBER}
                     """
                 }
             }

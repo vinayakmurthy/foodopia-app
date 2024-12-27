@@ -23,7 +23,7 @@ spec:
         - name: app-cont
           image: "{{ .Values.app.image }}:{{ .Values.app.tag }}"
           ports:
-              containerPort: 80
+            - containerPort: 80
           env: 
             - name: GOOGLE_CLOUD_PROJECT_ID
               valueFrom:

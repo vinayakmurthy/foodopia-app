@@ -19,7 +19,7 @@ spec:
         - name: db-cont
           image: "{{ .Values.db.image }}:{{ .Values.db.tag }}"
           ports:
-              containerPort: 3306
+            - containerPort: 3306
           env:
             - name: MYSQL_DATABASE
               valueFrom:
