@@ -61,7 +61,7 @@ pipeline{
             steps{
                 script{
                     sh """
-                        helm --upgrade install foodopia-release ./foodopia-kube \
+                        helm upgrade --install foodopia-release ./foodopia-kube \
                         --namespace foodopia \
                         --set app.image=${DOCKER_APP_IMAGE} \
                         --set app.tag=V${BUILD_NUMBER} \
