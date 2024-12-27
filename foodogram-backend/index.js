@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 // At the top of your file, update the db connection
 const db = mysql.createPool({
-    host: 'foodopia-db-service',
+    host: 'foodopia-db-svc',
     user: 'vinayak',
     password: process.env.DB_USER_PASSWORD,
     database: 'foodogram',
