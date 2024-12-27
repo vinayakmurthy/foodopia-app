@@ -65,7 +65,7 @@ pipeline{
                         --namespace foodopia \
                         --set app.image=${DOCKER_APP_IMAGE} \
                         --set app.tag=${BUILD_NUMBER} \
-                        --set db.image=${DOCKER_DB_IMAGE}
+                        --set db.image=${DOCKER_DB_IMAGE} \
                         --set db.tag=${BUILD_NUMBER}
                     """
                 }
