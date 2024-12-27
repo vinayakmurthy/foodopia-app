@@ -1,8 +1,6 @@
 pipeline{
     agent any
     environment{
-        S3_BUCKET_NAME='foodogram-recipes'
-        AWS_REGION='eu-north-1'
         DOCKER_APP_IMAGE= 'coderhub1/foodopia'
         DOCKER_DB_IMAGE = 'coderhub1/foodopia_db'
     }
