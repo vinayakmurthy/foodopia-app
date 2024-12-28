@@ -1,36 +1,32 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-metadata: 
+metadata:
   name: foodopia-ingress
-  annotations: 
-    kubernetes.io/ingress.class: "nginx"
-    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:eu-north-1:381492127977:certificate/691ab551-e264-4325-83a8-da960fe67c5c"
-    alb.ingress.kubernetes.io/ssl-policy: "ELBSecurityPolicy-2016-08"
-    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"  # This will redirect www to non-www
+  namespace: foodopia
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-north-1:381492127977:certificate/691ab551-e264-4325-83a8-da960fe67c5c"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
 spec:
   rules:
-    - host: foodopia.life
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend: 
-              service:
-                name: ELB-SVC
-                port:
-                  number: 80
-    - host: www.foodopia.life
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend: 
-              service:
-                name: ELB-SVC
-                port:
-                  number: 80
-  tls:
-    - hosts:
-        - foodopia.life
-        - www.foodopia.life
-      secretName: foodopia-tls
+  - host: foodopia.life
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: elb-svc
+            port:
+              number: 80
+  - host: www.foodopia.life
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: elb-svc
+            port:
+              number: 80
