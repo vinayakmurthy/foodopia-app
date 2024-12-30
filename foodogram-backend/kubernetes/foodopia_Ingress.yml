@@ -19,7 +19,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: foodopia-app-svc
+            name: elb-svc
             port:
               number: 80
   - host: www.foodopia.life
@@ -29,6 +29,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: foodopia-app-svc
+            name: elb-svc
             port:
               number: 80
