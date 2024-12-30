@@ -129,6 +129,11 @@ const COOKING_BADGES = {
   CULINARY_LEGEND: 'Culinary Legend'
 };
 
+// Health check route
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 // Signup Route
 app.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
