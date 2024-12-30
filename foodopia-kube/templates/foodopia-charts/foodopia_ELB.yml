@@ -9,13 +9,6 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-north-1:381492127977:certificate/691ab551-e264-4325-83a8-da960fe67c5c"
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
-    service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval: "10" # Interval between health checks
-    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/health" # Health check endpoint
-    service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "80" # Port for health checks
-    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: "HTTP" # Protocol for health checks
-    service.beta.kubernetes.io/aws-load-balancer-healthcheck-timeout: "5" # Timeout for health check response
-    service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold: "3" # Threshold for marking target unhealthy
-    service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold: "2" # Threshold for marking target healthy
 spec:
   type: LoadBalancer
   selector:
