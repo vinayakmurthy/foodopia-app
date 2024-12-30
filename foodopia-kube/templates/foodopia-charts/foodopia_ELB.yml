@@ -5,8 +5,6 @@ metadata:
   namespace: foodopia
   labels:
     app: elb-svc
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: "alb"
 spec:
   type: LoadBalancer
   selector:
