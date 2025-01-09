@@ -30,6 +30,7 @@ pipeline{
                                 -Dsonar.projectName=foodopia-app-back \
                                 -Dsonar.projectVersion=1.0 \
                                 -Dsonar.sources=. \
+                                -Dsonar.qualitygate=foodopia-qg
                             """        
                         } 
                     }      
@@ -50,6 +51,7 @@ pipeline{
                                 -Dsonar.projectName=foodopia-app-front \
                                 -Dsonar.ProjectVersion=1.0 \
                                 -Dsonar.sources=src \
+                                -Dsonar.qualitygate=foodopia-qg
                             
                             """
                         }
