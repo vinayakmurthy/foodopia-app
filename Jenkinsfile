@@ -52,7 +52,6 @@ pipeline{
                                 -Dsonar.ProjectVersion=1.0 \
                                 -Dsonar.sources=src \
                                 -Dsonar.qualitygate=foodopia-qg
-                            
                             """
                         }
                            
@@ -64,11 +63,10 @@ pipeline{
         stage('quality gates'){
             steps{
                 timeout(time:1, unit:'HOURS'){
-                    waitForQualityGate abortPipeline: True
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
-
 
         /*stage("build the app-image"){
             steps{
