@@ -59,6 +59,14 @@ pipeline{
                 }
             }
         }
+        stage('quality gates'){
+            steps{
+                timeout(time:1, unit:'HOURS'){
+                    waitForQualityGate abortPipeline: True
+                }
+            }
+        }
+
 
         /*stage("build the app-image"){
             steps{
