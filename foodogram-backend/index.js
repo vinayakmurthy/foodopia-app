@@ -28,27 +28,16 @@ const upload = multer({
 const app = express();
 const port = 80;
 
-const allowedOrigins = ['https://foodopia.life', 'https://www.foodopia.life'];
-
-app.use(bodyParser.json({ limit: '10kb' })); // Limit payload size to prevent DoS attacks
-
-// Enhanced CORS configuration
+app.use(bodyParser.json());
 app.use(cors({
-  origin: (origin, callback) => {
-    if (origin && allowedOrigins.includes(origin)) {
-      callback(null, true); // Allow requests from valid origins
-    } else {
-      callback(new Error('Not allowed by CORS')); // Block requests from invalid origins
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow only required methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow only required headers
+  origin: ['https://foodopia.life', 'https://www.foodopia.life'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Logging middleware with sanitization
 app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path}`, { body: '[redacted]' }); // Avoid logging sensitive data
-  next();
+    console.log(`${req.method} ${req.path}`, req.body);
+    next();
 });
 
 // At the top of your file, update the db connection
