@@ -169,11 +169,12 @@ pipeline{
             }
         }
         post {
-        success {
-            slackSend(channel: SLACK_CHANNEL, message: "Pipeline completed successfully :tada:")
-        }
-        failure {
-            slackSend(channel: SLACK_CHANNEL, message: "Pipeline failed :x: Check logs for details.")
+            success {
+                slackSend(channel: SLACK_CHANNEL, message: "Pipeline completed successfully :tada:")
+            }
+            failure {
+                slackSend(channel: SLACK_CHANNEL, message: "Pipeline failed :x: Check logs for details.")
+            }
         }
     }
 }
