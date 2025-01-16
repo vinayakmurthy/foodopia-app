@@ -1,69 +1,92 @@
 pipeline{
     agent any
 
-    tools
-        {  
-            jdk "JDK11"
-        }
-
     environment{
         DOCKER_APP_IMAGE= 'coderhub1/foodopia'
         DOCKER_DB_IMAGE = 'coderhub1/foodopia_db'
         scannerHome = tool 'sonarscanner'
+        SLACK_CHANNEL = '#foodopia-cicd'
     }
 
     stages{
         stage('clone the repo'){
             steps{
-                git branch: 'main', url: 'https://github.com/vinayakmurthy/foodopia-app.git'
-            }
-        }
-        
-        stage('sonarscanner for backend') {
-            steps{
                 script{
-                    dir('foodogram-backend') {
-                        withSonarQubeEnv('sonar'){
-                            sh """
-                                ${scannerHome}/bin/sonar-scanner \
-                                -Dsonar.projectKey=foodopia-backend \
-                                -Dsonar.projectName=foodopia-app-back \
-                                -Dsonar.projectVersion=1.0 \
-                                -Dsonar.sources=. \
-                                -Dsonar.qualitygate=foodopia-qg
-                            """        
-                        } 
-                    }      
-
+                    try{
+                        git branch: 'main', url: 'https://github.com/vinayakmurthy/foodopia-app.git'
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: Clone Repo completed successfully :white_check_mark:")
+                    } catch (e) {
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: Clone Repo failed :x: Error: ${e.message}")
+                    }
                 }
                 
             }
         }
-
-        stage('sonarscanner for frontend'){
+        
+        stage('sonarscanner for backend') {
+            tools {
+                jdk "JDK11"
+            }
             steps{
                 script{
-                    dir('foodogram-frontend'){
-                        withSonarQubeEnv('sonar'){
-                            sh """
-                                ${scannerHome}/bin/sonar-scanner \
-                                -Dsonar.projectKey=foodogram-frontend \
-                                -Dsonar.projectName=foodopia-app-front \
-                                -Dsonar.ProjectVersion=1.0 \
-                                -Dsonar.sources=src \
-                                -Dsonar.qualitygate=foodopia-qg
-                            """
+                    try{
+                        dir('foodogram-backend') {
+                            withSonarQubeEnv('sonar'){
+                                sh """
+                                    ${scannerHome}/bin/sonar-scanner \
+                                    -Dsonar.projectKey=foodopia-backend \
+                                    -Dsonar.projectName=foodopia-app-back \
+                                    -Dsonar.projectVersion=1.0 \
+                                    -Dsonar.sources=. \
+                                    -Dsonar.qualitygate=foodopia-qg
+                                """        
+                            } 
                         }
-                           
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: SonarScanner for Backend completed successfully :white_check_mark:")     
+                    } catch (e){
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: SonarScanner for Backend failed :x: Error: ${e.message}:")
                     }
+                } 
+            }
+        }
 
+        stage('sonarscanner for frontend'){
+            tools{
+                jdk "JDK11"
+            }
+            steps{
+                script{
+                    try{
+                        dir('foodogram-frontend'){
+                            withSonarQubeEnv('sonar'){
+                                sh """
+                                    ${scannerHome}/bin/sonar-scanner \
+                                    -Dsonar.projectKey=foodogram-frontend \
+                                    -Dsonar.projectName=foodopia-app-front \
+                                    -Dsonar.ProjectVersion=1.0 \
+                                    -Dsonar.sources=src \
+                                    -Dsonar.qualitygate=foodopia-qg
+                                """
+                            }  
+                        }
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: SonarScanner for frontend completed successfully :white_check_mark:")
+                    } catch (e) {
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: SonarScanner for frontend failed :x: Error: ${e.message}:")
+                    }
                 }
             }
         }
         stage('quality gates'){
             steps{
-                timeout(time:1, unit:'HOURS'){
-                    waitForQualityGate abortPipeline: true
+                script{
+                    try{
+                        timeout(time:1, unit:'HOURS'){
+                        waitForQualityGate abortPipeline: true
+                        }
+                    slackSend(channel: SLACK_CHANNEL, message: "Stage: Quality Gates passed successfully :white_check_mark:")    
+                    } catch (e){
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: Quality Gates failed :x: Error: ${e.message}")
+                    }
                 }
             }
         }
