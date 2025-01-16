@@ -91,46 +91,68 @@ pipeline{
             }
         }
 
-        /*stage("build the app-image"){
+        stage("build app-image"){
             steps{
-                withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
-                    echo "google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS"
-                    sh "cp -f $GOOGLE_APPLICATION_CREDENTIALS ./Google_creds.json"
-                    sh "docker build --no-cache -t ${DOCKER_APP_IMAGE}:${BUILD_NUMBER} ."
+                script{
+                    withCredentials([file(credentialsId: 'GOOGLE_APPLICATION_CREDENTIALS', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
+                        try{
+                            echo "google cred file is at: $GOOGLE_APPLICATION_CREDENTIALS"
+                            sh "cp -f $GOOGLE_APPLICATION_CREDENTIALS ./Google_creds.json"
+                            sh "docker build --no-cache -t ${DOCKER_APP_IMAGE}:${BUILD_NUMBER} ."
+                            slackSend(channel: SLACK_CHANNEL, message: "Stage: build app-image passed successfully :white_checkmark:")
+                        } catch (e){
+                            slackSend(channel: SLACK_CHANNEL, message: "Stage: build app-image failed :x: Error: ${e.message}")
+                        }
+                    }
                 }
+
             }
         }
-        stage('build the database image'){
+        stage('build the database-image'){
             steps{
-                sh """
-                    docker build -t $DOCKER_DB_IMAGE:$BUILD_NUMBER ./database_mariadb/
-                    """
+                script{
+                    try{
+                        sh """
+                        docker build -t $DOCKER_DB_IMAGE:$BUILD_NUMBER ./database_mariadb/
+                        """
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: build database-image passed successfully :white_checkmark:")
+                    } catch (e){
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: build database-image failed :x: Error: ${e.message}")
+                    }
+                }
             }
         }
 
         stage('Push the images to docker hub'){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'dockercred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
-                    sh """
+                    try{
+                        sh """
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
                         docker push ${DOCKER_APP_IMAGE}:${BUILD_NUMBER}
                         docker push ${DOCKER_DB_IMAGE}:${BUILD_NUMBER}
-                    """
+                        """
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: Push the images to docker hub passed successfully :white_checkmark:")
+                    } catch (e){
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: Push the images to docker hub failed :x: Error: ${e.message}")
+                    }
                 }
+                    
             }
         }
         
-        stage('Create container using docker compose'){
+        /*stage('Create container using docker compose'){
             steps{
                 sh "docker compose up -d"
             }
-        }
+        }*/
 
         stage('Deploy to kubernetes'){ 
             agent {label 'kops'}
             steps{
                 script{
-                    sh """
+                    try{
+                        sh """
                         helm upgrade --install foodopia-release ./foodopia-kube \
                         --namespace foodopia \
                         --set app.image=${DOCKER_APP_IMAGE} \
@@ -138,8 +160,12 @@ pipeline{
                         --set db.image=${DOCKER_DB_IMAGE} \
                         --set db.tag=${BUILD_NUMBER}
                     """
+                    slackSend(channel: SLACK_CHANNEL, message: "Stage: Deploy to kubernetes passed successfully :white_checkmark:")
+                    } catch (e){
+                        slackSend(channel: SLACK_CHANNEL, message: "Stage: Deploy to kubernetes failed :x: Error: ${e.message}")
+                    }
                 }
             }
-        }*/
+        }
     }
 }
