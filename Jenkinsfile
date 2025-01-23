@@ -18,12 +18,11 @@ pipeline{
                     } catch (e) {
                         slackSend(channel: SLACK_CHANNEL, message: "Stage: Clone Repo failed :x: Error: ${e.message}")
                     }
-                }
-                
+                }             
             }
         }
         
-        stage('sonarscanner for backend') {
+        /*stage('sonarscanner for backend') {
             tools {
                 jdk "JDK11"
             }
@@ -63,7 +62,7 @@ pipeline{
                                     ${scannerHome}/bin/sonar-scanner \
                                     -Dsonar.projectKey=foodogram-frontend \
                                     -Dsonar.projectName=foodopia-app-front \
-                                    -Dsonar.ProjectVersion=1.0 \
+                                    -Dsonar.projectVersion=1.0 \
                                     -Dsonar.sources=src \
                                     -Dsonar.qualitygate=foodopia-qg
                                 """
@@ -89,7 +88,7 @@ pipeline{
                     }
                 }
             }
-        }
+        }*/
 
         stage("build app-image"){
             steps{
