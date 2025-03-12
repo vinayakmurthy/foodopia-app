@@ -15,21 +15,11 @@ spec:
       labels:
         app: foodopia-app
     spec:
-      securityContext: 
-        runAsUser: 1001
-        runAsGroup: 3001
-        fsGroup: 2000
       initContainers:
         - name: init-wait-db
           image: busybox
           command: ['sh', '-c', 'until nc -z foodopia-db-svc 3306; do echo waiting for database; sleep 5; done']
       containers:
-        securityContext:
-          allowPriviligeEscalation: false
-          readOnlyRootFilesystem: false
-          capabilities:
-            drop:
-              - ALL
         - name: app-cont
           image: "{{ .Values.app.image }}:{{ .Values.app.tag }}"
           ports:
