@@ -22,7 +22,7 @@ pipeline{
             }
         }
         
-        /*stage('sonarscanner for backend') {
+        stage('sonarscanner for backend') {
             tools {
                 jdk "JDK11"
             }
@@ -88,7 +88,7 @@ pipeline{
                     }
                 }
             }
-        }*/
+        }
 
         stage("build app-image"){
             steps{
@@ -152,14 +152,19 @@ pipeline{
             steps{
                 script{
                     try{
-                        sh """
-                        helm upgrade --install foodopia-release ./foodopia-kube \
-                        --namespace foodopia \
-                        --set app.image=${DOCKER_APP_IMAGE} \
-                        --set app.tag=${BUILD_NUMBER} \
-                        --set db.image=${DOCKER_DB_IMAGE} \
-                        --set db.tag=${BUILD_NUMBER}
-                    """
+                        withCredentials([file(credentialsId: 'svc-kubeconfig', variable: 'SVCKUBECONFIG')]){
+                            sh """
+                            export KUBECONFIG=$SVCKUBECONFIG 
+                            kubectl get pods
+                            helm upgrade --install foodopia-release ./foodopia-kube \
+                            --namespace foodopia \
+                            --set app.image=${DOCKER_APP_IMAGE} \
+                            --set app.tag=${BUILD_NUMBER} \
+                            --set db.image=${DOCKER_DB_IMAGE} \
+                            --set db.tag=${BUILD_NUMBER}
+                            """
+                        }
+                        
                     slackSend(channel: SLACK_CHANNEL, message: "Stage: Deploy to kubernetes passed successfully :white_checkmark:")
                     } catch (e){
                         slackSend(channel: SLACK_CHANNEL, message: "Stage: Deploy to kubernetes failed :x: Error: ${e.message}")
