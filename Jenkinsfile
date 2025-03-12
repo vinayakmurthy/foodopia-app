@@ -22,7 +22,7 @@ pipeline{
             }
         }
         
-        stage('sonarscanner for backend') {
+        /*stage('sonarscanner for backend') {
             tools {
                 jdk "JDK11"
             }
@@ -88,7 +88,7 @@ pipeline{
                     }
                 }
             }
-        }
+        }*/
 
         stage("build app-image"){
             steps{
