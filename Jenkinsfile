@@ -147,7 +147,7 @@ pipeline{
             }
         }*/
 
-        stage('Deploy to kubernetes'){ 
+        /*stage('Deploy to kubernetes'){ 
             agent {label 'kops'}
             steps{
                 script{
@@ -173,7 +173,7 @@ pipeline{
                 }
             }
         }
-    }
+    }*/
 
     post{
         success {
