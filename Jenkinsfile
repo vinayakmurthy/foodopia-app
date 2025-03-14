@@ -172,8 +172,8 @@ pipeline{
                     }
                 }
             }
-        }
-    }*/
+        }*/
+    }
 
     post{
         success {
