@@ -154,7 +154,8 @@ pipeline{
                     try{
                         withCredentials([file(credentialsId: 'svc-kubeconfig', variable: 'SVCKUBECONFIG')]){
                             sh """
-                            export KUBECONFIG=$SVCKUBECONFIG 
+                            export KUBECONFIG=$SVCKUBECONFIG
+                            kubectl get nodes 
                             kubectl get pods
                             helm upgrade --install foodopia-release ./foodopia-kube \
                             --namespace foodopia \

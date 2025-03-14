@@ -40,6 +40,23 @@ app.use((req, res, next) => {
     next();
 });
 
+// Liveness Probe - checks if the app is alive
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
+// Readiness Probe - checks if the app is ready to serve traffic (including DB connection)
+app.get('/ready', async (req, res) => {
+  try {
+    const [rows] = await promisePool.query('SELECT 1'); // simple DB test query
+    res.status(200).send('READY');
+  } catch (err) {
+    console.error('Readiness check failed:', err);
+    res.status(500).send('NOT READY');
+  }
+});
+
+
 // At the top of your file, update the db connection
 const db = mysql.createPool({
     host: 'foodopia-db-svc',
