@@ -156,7 +156,8 @@ pipeline{
                             kubectl get nodes 
                             kubectl get pod
                             kubectl create -f namespace.yml
-                            kubectl apply -f .
+                            kubectl create -f sens-data.yml
+                            kubectl create -f non-sens-data.yml
                             helm upgrade --install foodopia-release ./foodopia-kube \
                             --namespace foodopia \
                             --set app.image=${DOCKER_APP_IMAGE} \
