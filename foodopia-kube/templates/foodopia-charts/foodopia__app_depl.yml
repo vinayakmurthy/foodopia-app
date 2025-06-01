@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: foodopia-deployment
-  namespace: foodopia  # This dynamically uses the namespace provided during Helm install/upgrade
+  namespace: foodopia
   labels: 
     app: foodopia-app
 spec: 
@@ -10,6 +10,11 @@ spec:
   selector: 
     matchLabels:
       app: foodopia-app
+  strategy:
+    type: RollingUpdate
+    rollingupdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:

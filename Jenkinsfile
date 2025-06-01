@@ -22,7 +22,7 @@ pipeline{
             }
         }
         
-        /*stage('sonarscanner for backend') {
+        stage('sonarscanner for backend') {
             tools {
                 jdk "JDK11"
             }
@@ -88,7 +88,7 @@ pipeline{
                     }
                 }
             }
-        }*/
+        }
 
         stage("build app-image"){
             steps{
@@ -147,7 +147,7 @@ pipeline{
             }
         }*/
 
-        /*stage('Deploy to kubernetes'){ 
+        stage('Deploy to kubernetes'){ 
             agent {label 'kops'}
             steps{
                 script{
@@ -172,7 +172,7 @@ pipeline{
                     }
                 }
             }
-        }*/
+        }
     }
 
     post{

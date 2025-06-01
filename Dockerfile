@@ -47,7 +47,7 @@ RUN ls -la ./
 #now copy the build folder that we generated in first stage to /foodopia/foodogram-backend
 COPY --from=frontend-build /foodopia/foodogram-frontend/build/. /foodopia/foodogram-backend/build
 
-#expose the image to 3000
+#expose the image to 80
 EXPOSE 80
 
 #Now run the index.js
