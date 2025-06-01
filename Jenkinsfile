@@ -154,8 +154,7 @@ pipeline{
                     try{
                             sh """
                             kubectl get nodes 
-                            kubectl get pods
-                            cd foodopia
+                            kubectl get pod
                             kubectl create -f namespace.yml
                             kubectl apply -f .
                             helm upgrade --install foodopia-release ./foodopia-kube \
