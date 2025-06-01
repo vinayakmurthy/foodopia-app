@@ -157,6 +157,10 @@ pipeline{
                             export KUBECONFIG=$SVCKUBECONFIG
                             kubectl get nodes 
                             kubectl get pods
+                            cd foodopia
+                            kubectl create -f namespace.yml
+                            kubectl apply -f .
+                            kubectl create -f 
                             helm upgrade --install foodopia-release ./foodopia-kube \
                             --namespace foodopia \
                             --set app.image=${DOCKER_APP_IMAGE} \
