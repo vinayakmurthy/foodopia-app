@@ -6,7 +6,7 @@ metadata:
   labels:
     app: elb-svc
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-north-1:982081083638:certificate/72de7302-06bb-4e69-9f1d-5a60bdc6633c"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-north-1:982081083638:certificate/c7589630-7f75-4c02-a4b6-e5cbe4f73b09"
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
 spec:
